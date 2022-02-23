@@ -1,7 +1,7 @@
 # m3allam
 **brief description**<br/>
-This platform allows users to promote their services and reach out more costumes
-**stack/frameworks used**<br/>
+This platform allows users to promote their services and reach out more costumes.
+<br/>**stack/frameworks used**<br/>
 <img src="https://github.com/get-icon/geticon/raw/master/icons/nodejs.svg" width="50" height="50">
 <img src="https://github.com/get-icon/geticon/raw/master/icons/express.svg" width="50" height="50">
 <img src="https://github.com/get-icon/geticon/raw/master/icons/mongodb.svg" width="50" height="50">
