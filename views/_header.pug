@@ -1,0 +1,23 @@
+.bg-dark.p-1.w-4.border-bottom
+    .container
+        .row
+            .col.text-left
+                a(href=`/${lang}`)
+                    img(src="/../graphics/logo.png", alt="m3allam.ma" width="160px")
+            .col.text-right.my-auto
+                if (user)
+                    if (lang === "ar")
+                        img.rounded-circle(src=`/../graphics/worker/${user.photo}`, alt="profile" width="45px" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content=`<a href="/${lang}/mon-compte/${user._id}" class="btn btn-success w-100 body-style">الصفحة الشخصية</a></br><a href="/${lang}/deconnecter" class="btn btn-light mt-2 w-100 body-style">تسجيل الخروج</a>`)
+                    if (lang === "fr")
+                        img.rounded-circle(src=`/../graphics/worker/${user.photo}`, alt="profile" width="45px" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom" data-content=`<a href="/${lang}/mon-compte/${user._id}" class="btn btn-success w-100 body-style">profile</a></br><a href="/${lang}/deconnecter" class="btn btn-light mt-2 w-100 body-style">Se déconnecter</a>`)
+                else
+                    if (lang === "ar")
+                        a(href=`/${lang}/se-connecter`)
+                            button.btn.btn-success(type="button") تسجيل الدخول
+                        a(href="/fr")
+                            img(src="/../graphics/fr.png", alt="arabic" width="25px").ml-2
+                    if (lang === "fr")
+                        a(href=`/${lang}/se-connecter`)
+                            button.btn.btn-success(type="button") Se connecter
+                        a(href="/ar")
+                            img(src="/../graphics/ar.png", alt="arabic" width="25px").ml-2

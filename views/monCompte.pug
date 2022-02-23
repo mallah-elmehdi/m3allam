@@ -1,0 +1,63 @@
+include base
+
+block content
+    include _header1
+    if (lang === "ar")
+        .container.text-right
+            .btn-group.mt-3
+                a.btn.btn-info.rounded-pill.mr-2(href=`/${lang}/mon-compte/${user._id}/mes-informations`) معلوماتي
+                    i.fas.fa-cog.ml-2
+                a.btn.btn-info.rounded-pill(href=`/${lang}/mon-compte/${user._id}/ajouter`)  إضافة خدمة
+                    i.fas.fa-plus.ml-2
+            .border.bg-white.rounded.px-3.my-3.pt-3
+                if (services.length > 0)
+                    .row
+                        each aservice in services
+                            .col-lg-3.col-md-6.col-sm-12
+                                .text-dark(data-toggle="collapse" data-target=`#a${aservice._id}` aria-expanded="false" aria-controls=`a${aservice._id}`)
+                                    i.fas.fa-ellipsis-v
+                                .collapse.mb-1(id=`a${aservice._id}`)
+                                    button.btn.btn-danger(class="btn btn-primary" data-toggle="modal" data-target=id=`#b${aservice._id}`) حذف الخدمة 
+                                    
+                                    .modal.fade(id=`b${aservice._id}` tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+                                        .modal-dialog(role="document")
+                                            .modal-content
+                                                .modal-header هل تريد حذف هذه الخدمة؟
+                                                .modal-footer.text-right
+                                                    form(action=`/${lang}/mon-compte/${user._id}?sid=${aservice._id}&_method=DELETE` method="POST")
+                                                        button.btn.btn-danger(type="submit") تأكيد
+                                                    button.btn.btn-light(type="button" data-dismiss="modal" data-toggle="collapse" data-target=`#a${aservice._id}` aria-expanded="false" aria-controls=`a${aservice._id}`) إلغاء
+                                include _card2
+                else
+                    .text-center.text-secondary.mb-3#edit لم تضف أي خدمة بعد
+            
+
+    if (lang === "fr")
+        .container
+            .btn-group.mt-3
+                a.btn.btn-info.rounded-pill.mr-2(href=`/${lang}/mon-compte/${user._id}/mes-informations`) 
+                    i.fas.fa-cog.mr-2
+                    span mes informations
+                a.btn.btn-info.rounded-pill(href=`/${lang}/mon-compte/${user._id}/ajouter`)
+                    i.fas.fa-plus.mr-2
+                    span ajouter un service
+            .border.bg-white.rounded.px-3.my-3.pt-3
+                if (services.length > 0)
+                    .row
+                        each aservice in services
+                            .col-lg-3.col-md-6.col-sm-12
+                                .text-dark(data-toggle="collapse" data-target=`#a${aservice._id}` aria-expanded="false" aria-controls=`a${aservice._id}`)
+                                    i.fas.fa-ellipsis-v
+                                .collapse.mb-1(id=`a${aservice._id}`)
+                                    button.btn.btn-danger(class="btn btn-primary" data-toggle="modal" data-target=id=`#b${aservice._id}`) Supprimer le service
+                                    .modal.fade(id=`b${aservice._id}` tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+                                        .modal-dialog(role="document")
+                                            .modal-content
+                                                .modal-header Voulez-vous supprimer ce service?
+                                                .modal-footer
+                                                    form(action=`/${lang}/mon-compte/${user._id}?sid=${aservice._id}&_method=DELETE` method="POST")
+                                                        button.btn.btn-danger(type="submit") confirmer
+                                                    button.btn.btn-light(type="button" data-dismiss="modal" data-toggle="collapse" data-target=`#a${aservice._id}` aria-expanded="false" aria-controls=`a${aservice._id}`) annuler
+                                include _card2
+                else
+                    .text-center.text-secondary.mb-3#edit Vous n'avez pas encore ajouté de services

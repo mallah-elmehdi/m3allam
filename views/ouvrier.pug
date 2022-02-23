@@ -1,0 +1,85 @@
+include base
+
+block append footer
+  script(src="/../js/service.js")
+
+block content
+    include _header1
+    form(action="/" method="POST")
+        input.d-none(type="text" name="search" value="")
+        input.d-none(type="text" name="city" value=JSON.stringify(auser.city))
+        input.d-none(type="text" name="jiha" value=`${auser.jiha}`)
+
+        if (lang === "ar")
+            .scrl-h.w-100.h-100.my-3.border-bottom
+                each job in jobs
+                    button.btn.alert-info.service.rounded-pill.ml-3.mb-3(name="service" value=`${job.fr}`)=job.ar
+
+        if (lang === "fr")
+            .scrl-h.w-100.h-100.my-3.border-bottom
+                each job in jobs
+                    button.btn.alert-info.service.rounded-pill.ml-3.mb-3(name="service" value=`${job.fr}`)=job.fr
+    .container
+        if (lang === "ar")
+            .row.my-5
+                .col-lg-3.col-md-6.col-sm-12
+                    .rounded.border.p-3.stic-top.z-ind.bg-white.mb-3.text-right
+                        .grid-4.mb-2
+                            .mr-2.fn-20.my-auto
+                                span=auser.name
+                            img.m-auto.rounded-pill(src=`/../graphics/worker/${auser.photo}`, alt="profile").w-100
+                        if (auser.whatsapp === "oui")
+                            .grid-1
+                                .btn.dbiha(data-phone=`${auser.phone}`)
+                                    i.fab.fa-whatsapp.text-success.fa-2x
+                                a.btn.btn-outline-success.my-auto.ml-3(href=`tel:${auser.phone}`) اتصل
+                        if (auser.whatsapp === "non")
+                            a.btn.btn-outline-success.my-auto.w-100(href=`tel:${auser.phone}`) اتصل
+
+                        .badge.badge-pill.bg-my.mt-2
+                            .fn-20.text-dark=auser.city.ar
+                                img.ml-2.bg-success.rounded-circle.p-1(src="/../graphics/index/location.png", width="25px")
+
+                .col-lg-9.col-md-6.col-sm-12
+                    .pt-3.px-3
+                        if (services.length > 0)
+                            .row
+                                each aservice in services
+                                    .col-lg-4.col-md-6.col-sm-12
+                                        include _card2
+                        else
+                            .text-center.text-secondary.mb-3 هذا العامل لم يضف خدمات بعد
+
+        if (lang === "fr")
+            .row.my-5
+                .col-lg-3.col-md-6.col-sm-12
+                    .rounded.border.p-3.stic-top.z-ind.bg-white.mb-3
+                        .grid-4.mb-2
+                            .mr-2.fn-20.my-auto
+                                span=auser.name
+                            img.m-auto.rounded-pill(src=`/../graphics/worker/${auser.photo}`, alt="profile").w-100
+                        if (auser.whatsapp === "oui")
+                            .grid-1
+                                .btn.dbiha(data-phone=`${auser.phone}`)
+                                    i.fab.fa-whatsapp.text-success.fa-2x
+                                a.btn.btn-outline-success.my-auto.ml-3(href=`tel:${auser.phone}`) appel
+                        if (auser.whatsapp === "non")
+                            a.btn.btn-outline-success.my-auto.w-100(href=`tel:${auser.phone}`) appel
+
+                        .badge.badge-pill.bg-my.mt-2
+                            .fn-20.text-dark=auser.city.fr
+                                img.ml-2.bg-success.rounded-circle.p-1(src="/../graphics/index/location.png", width="25px")
+
+                .col-lg-9.col-md-6.col-sm-12
+                    .pt-3.px-3
+                        if (services.length > 0)
+                            .row
+                                each aservice in services
+                                    .col-lg-4.col-md-6.col-sm-12
+                                        include _card2
+                        else
+                            .text-center.text-secondary.mb-3 ce m3allam n'a pas encore ajouté de services
+
+    #footer
+        include _footer
+        #Whats

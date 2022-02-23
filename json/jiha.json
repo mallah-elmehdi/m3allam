@@ -1,0 +1,86 @@
+[
+  {
+    "type": {
+      "ar": "جهة الدار البيضاء سطات",
+      "fr": "Région de Casablanca-Settat"
+    },
+    "id": "casa"
+  },
+  {
+    "type": {
+      "ar": "جهة الرباط سلا القنيطرة",
+      "fr": "Région de Rabat-Salé-Kénitra"
+    },
+    "id": "rabat"
+  },
+  {
+    "type": {
+      "ar": "جهة مراكش آسفي",
+      "fr": "Région de Marrakech-Safi"
+    },
+    "id": "marakesh"
+  },
+  {
+    "type": {
+      "ar": "جهة فاس مكناس",
+      "fr": "Région de Fès-Meknès"
+    },
+    "id": "maknas"
+  },
+  {
+    "type": {
+      "ar": "جهة طنجة تطوان الحسيمة",
+      "fr": "Région de Tanger-Tétouan-Al Hoceïma"
+    },
+    "id": "tanja"
+  },
+  {
+    "type": {
+      "ar": "جهة الشرق",
+      "fr": "Région de l'Oriental"
+    },
+    "id": "chark"
+  },
+  {
+    "type": {
+      "ar": "جهة بني ملال خنيفرة",
+      "fr": "Région de Béni Mellal-Khénifra"
+    },
+    "id": "benimalal"
+  },
+  {
+    "type": {
+      "ar": "جهة درعة تافيلالت",
+      "fr": "Région de Drâa-Tafilalet"
+    },
+    "id": "daraa"
+  },
+  {
+    "type": {
+      "ar": "جهة سوس ماسة",
+      "fr": "Région de Souss-Massa"
+    },
+    "id": "souss"
+  },
+  {
+    "type": {
+      "ar": "جهة كلميم واد نون",
+      "fr": "Région de Guelmim-Oued Noun"
+    },
+    "id": "galmim"
+  },
+  {
+    "type": {
+      "ar": "جهة العيون الساقية الحمراء",
+      "fr": "Région de Laâyoune-Sakia El Hamra"
+    },
+    "id": "ayoun"
+  },
+  {
+    "type": {
+      "ar": "جهة الداخلة وادي الذهب",
+      "fr": "Région de Dakhla-Oued Ed Dahab"
+    },
+    "id": "dakhla"
+  }
+]

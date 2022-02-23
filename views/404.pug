@@ -1,0 +1,11 @@
+include base
+
+block content
+    .py-5.w-100.bg-white.text-center.h-100
+        .py-4
+            span.fn-20.mr-2 خطأ
+            i.text-danger.fas.fa-exclamation-triangle
+        .w-100
+            img(src=`/../graphics/${status}.jpg`, alt=`${status}`).w-100
+        .py-4
+            span.fn-20= message

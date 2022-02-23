@@ -1,0 +1,92 @@
+include base
+
+block append footer
+    if (lang === "ar")
+        script(src="/../js/inscrire.js")
+    if (lang === "fr")
+        script(src="/../js/inscrire-fr.js")
+
+
+block content
+    
+    .container.py-5
+        .border.shadow.rounded-lg.mx-auto.my-4.bg-white.p-5.w-1
+            if (lang === "ar")
+                .text-center.mb-3
+                    span.fn-20 انشاء حساب
+                form(action=`/${lang}/inscrire?phone=${phone}` method="post" enctype='multipart/form-data').text-right
+                    .form-group
+                        input.form-control(id="name" type="text"  name="name" placeholder="أدخل اسمك الكامل" dir="rtl")
+                        .invalid-feedback(id="name-feed") يجب أن يحتوي الاسم على أحرف فقط
+                    .form-group
+                        select.custom-select(id="jiha" name="jiha" dir="rtl" )
+                            option(selected disabled) اختر الجهة
+                            each jiha in jihat
+                                option(value=`${jiha.id}`)= jiha.type
+                    .form-group
+                        select.custom-select.is-valid(id="city" name="city" dir="rtl" style="display: none;")
+                    .form-group
+                        .w-100
+                            label.mr-2(id="whatsapp-text")= `هل تستخدم هذا الرقم ${phone} على الواتس اب`
+                            i.fab.fa-whatsapp.text-success
+                        .custom-control.custom-radio.custom-control-inline
+                            input.custom-control-input(type="radio" id="whatsOuiNo1" value="oui" name="whatsapp")
+                            label.custom-control-label(for="whatsOuiNo1") نعم
+                        .custom-control.custom-radio.custom-control-inline
+                            input.custom-control-input(type="radio" id="whatsOuiNo2" value="non" name="whatsapp")
+                            label.custom-control-label(for="whatsOuiNo2") لا
+                    .form-group
+                        .input-group.text-left
+                            .custom-file
+                                input.custom-file-input(type="file" id="picture" name="picture")
+                                label.custom-file-label(for="picture" data-browse="اضف صورة شخصية" aria-describedby="inputGroupFileAddon01") 
+                            .input-group-append
+                                .input-group-text(id="basic-addon2") 
+                                    i.fas.fa-camera
+                        small.text-danger(id="custom-feed")
+                    .form-group.fn-20(id="picture-preview" style="display: none;")
+                        i.fas.fa-times-circle.text-danger.mb-1(id="remove")
+                        .border.p-2.rounded
+                            img.w-100(id="preview" src="")
+                    button.btn.btn-success.w-100(type="submit") تسجيل
+
+            //- =====================================================
+
+            if (lang === "fr")
+                .text-center.mb-3
+                    span.fn-20 Créer votre compte
+                form(action=`/${lang}/inscrire?phone=${phone}` method="post" enctype='multipart/form-data')
+                    .form-group
+                        input.form-control(id="name" type="text"  name="name" placeholder="tapez votre nom complet")
+                        .invalid-feedback(id="name-feed") Le nom ne doit contenir que des lettres
+                    .form-group
+                        select.custom-select(id="jiha" name="jiha" )
+                            option(selected disabled) Choisissez la région
+                            each jiha in jihat
+                                option(value=`${jiha.id}`)= jiha.type.fr
+                    .form-group
+                        select.custom-select.is-valid(id="city" name="city" style="display: none;")
+                    .form-group
+                        .w-100
+                            i.fab.fa-whatsapp.text-success
+                            label.ml-2(id="whatsapp-text")= `Utilisez-vous ce numéro ${phone} sur Whatsapp`
+                        .custom-control.custom-radio.custom-control-inline
+                            input.custom-control-input(type="radio" id="whatsOuiNo1" value="oui" name="whatsapp")
+                            label.custom-control-label(for="whatsOuiNo1") oui
+                        .custom-control.custom-radio.custom-control-inline
+                            input.custom-control-input(type="radio" id="whatsOuiNo2" value="non" name="whatsapp")
+                            label.custom-control-label(for="whatsOuiNo2") non
+                    .form-group
+                        .input-group.text-left
+                            .input-group-append
+                                .input-group-text(id="basic-addon2")
+                                    i.fas.fa-camera                        
+                            .custom-file
+                                input.custom-file-input(type="file" id="picture" name="picture")
+                                label.custom-file-label(for="picture" data-browse="Ajouter une photo personnelle" aria-describedby="inputGroupFileAddon01") 
+                        small.text-danger(id="custom-feed")
+                    .form-group.fn-20(id="picture-preview" style="display: none;")
+                        i.fas.fa-times-circle.text-danger.mb-1(id="remove")
+                        .border.p-2.rounded
+                            img.w-100(id="preview" src="")
+                    button.btn.btn-success.w-100(type="submit") S'inscrire

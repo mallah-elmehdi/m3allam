@@ -1,0 +1,72 @@
+if (lang === "ar")
+    .card.border.text-right.mb-3.w-100
+        a(href=`/${lang}/service?id=${aservice._id}`).text-decoration-none.text-dark
+            img(src=`/../graphics/service/${aservice.picture}` class="card-img-top").w-100
+        .p-2
+            if (aservice.diploma === "oui")
+                .grid-7
+                    span(data-toggle="tooltip" data-placement="top" title="هذا العامل حاصل على دبلوم في هذا المجال")
+                        i.fas.fa-certificate.text-success
+                    .grid-0
+                        .grid-5.mr-2
+                            span= aservice.user.name
+                            small.text-muted= `${aservice.experience} : سنوات الخبرة `
+                        a(href=`/${lang}/ouvrier?id=${aservice.user._id}`).my-auto  
+                            img.m-auto.rounded-pill(src=`/../graphics/worker/${aservice.user.photo}`, alt="profile" width="30px")
+            if (aservice.diploma === "non")
+                .grid-0
+                    .grid-5.mr-2
+                        span= aservice.user.name
+                        small.text-muted= `${aservice.experience} : سنوات الخبرة `
+                    a(href=`/${lang}/ouvrier?id=${aservice.user._id}`).my-auto  
+                        img.m-auto.rounded-pill(src=`/../graphics/worker/${aservice.user.photo}`, alt="profile" width="30px")
+            .scrl-v
+                .card-text.mt-1.fn-12= `${aservice.explain.slice(0, 70)}...`
+            .text-right.mt-2.scrl-h-cs
+                .badge.badge-pill.bg-my.mr-2.mb-2= aservice.user.city.ar
+                    img.bg-info.rounded-circle.ml-2.p-1(src="/../graphics/index/location.png", alt="naraj", width="20px")
+                .badge.badge-pill.bg-my.mb-2
+                    -for(var i = 0; i < jobs.length; i++)
+                        if (jobs[i].fr === aservice.service)
+                            -var jobId = jobs[i].fr
+                            -var jobName = jobs[i].ar
+                    span= jobName
+                        img.ml-2.bg-info.rounded-circle.p-1(src=`/../graphics/index/${jobId}.png`, width="20px")
+
+//- ================================ FRENSH
+
+if (lang === "fr")
+    .card.border.mb-3.w-100
+        a(href=`/${lang}/service?id=${aservice._id}`).text-decoration-none.text-dark
+            img(src=`/../graphics/service/${aservice.picture}` class="card-img-top").w-100
+        .p-2
+            if (aservice.diploma === "oui")
+                .grid-8
+                    .grid-9
+                        a(href=`/${lang}/ouvrier?id=${aservice.user._id}`).my-auto  
+                            img.m-auto.rounded-pill(src=`/../graphics/worker/${aservice.user.photo}`, alt="profile" width="30px")
+                        .grid-5.ml-2
+                            span= aservice.user.name
+                            small.text-muted= `Années d'expérience : ${aservice.experience}`
+                    span(data-toggle="tooltip" data-placement="top" title="Ce m3allam a un diplôme dans ce domaine")
+                        i.fas.fa-certificate.text-success
+
+            if (aservice.diploma === "non")
+                .grid-9
+                    a(href=`/${lang}/ouvrier?id=${aservice.user._id}`).my-auto  
+                        img.m-auto.rounded-pill(src=`/../graphics/worker/${aservice.user.photo}`, alt="profile" width="30px")
+                    .grid-5.mr-2
+                        span= aservice.user.name
+                        small.text-muted= `Années d'expérience : ${aservice.experience}`
+            .scrl-v
+                .card-text.mt-1.fn-12= `${aservice.explain.slice(0, 70)}...`
+            .mt-2.scrl-h-cs
+                .badge.badge-pill.bg-my.mr-2.mb-2
+                    img.bg-info.rounded-circle.mr-1.p-1(src="/../graphics/index/location.png", alt="naraj", width="20px")
+                    span=aservice.user.city.fr
+                .badge.badge-pill.bg-my.mb-2
+                    -for(var i = 0; i < jobs.length; i++)
+                        if (jobs[i].fr === aservice.service)
+                            -var jobId = jobs[i].fr
+                    img.mr-1.bg-info.rounded-circle.p-1(src=`/../graphics/index/${jobId}.png`, width="20px")
+                    span= jobId

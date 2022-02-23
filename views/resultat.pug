@@ -1,0 +1,71 @@
+include base
+
+block append footer
+    if (lang === "ar")
+        script(src="/../js/resultat.js")
+    if (lang === "fr")
+        script(src="/../js/resultat-fr.js")
+
+block content
+    include _header1
+    if (lang === "ar")
+        .scrl-h.w-100.h-100.my-3.border-bottom
+            each job in jobs
+                button.btn.alert-info.service.rounded-pill.ml-3.mb-3(type="submit" name="service" value=`${job.fr}` form="go-form")=job.ar
+
+    if (lang === "fr")
+        .scrl-h.w-100.h-100.my-3.border-bottom
+            each job in jobs
+                button.btn.alert-info.service.rounded-pill.ml-3.mb-3(type="submit" name="service" value=`${job.fr}` form="go-form")=job.fr
+    .container
+        if (lang === "ar")
+            form#go-form(action="/" method="post").text-right
+                .row
+                    .col-lg-4.col-md-4.mb-3
+                        .grid-1
+                            button.btn.btn-success.mr-2.sub-mit
+                                i.fas.fa-search
+                            input.form-control.w-100(type="text" name="search" placeholder="بحث" dir="rtl")
+                    .col-lg-4.col-md-4.mb-3
+                        select.custom-select(id="city" name="city" dir="rtl" data-city=`${g_city}`)
+                    .col-lg-4.col-md-4.mb-3
+                        select.custom-select(id="jiha" name="jiha" dir="rtl")
+                            each jiha in jihat
+                                if (jiha.id === g_jiha)
+                                    option(value=`${jiha.id}` selected)= jiha.type.ar
+                                else
+                                    option(value=`${jiha.id}`)= jiha.type.ar
+            .row
+                if (services.length === 0)
+                    span.text-secondary.mt-5.mx-auto.text-center لا توجد نتائج لطلبك
+                each aservice in services
+                    .col-lg-3.col-md-6.col-sm-12
+                        include _card1
+
+        if (lang === "fr")
+            form#go-form(action="/" method="post")
+                .row
+                    .col-lg-4.col-md-4.mb-3
+                        .grid-1
+                            button.btn.btn-success.mr-2.sub-mit
+                                i.fas.fa-search
+                            input.form-control.w-100(type="text" name="search" placeholder="Chercher")
+                    .col-lg-4.col-md-4.mb-3
+                        select.custom-select(id="city" name="city" data-city=`${g_city}`)
+                    .col-lg-4.col-md-4.mb-3
+                        select.custom-select(id="jiha" name="jiha")
+                            each jiha in jihat
+                                if (jiha.id === g_jiha)
+                                    option(value=`${jiha.id}` selected)= jiha.type.fr
+                                else
+                                    option(value=`${jiha.id}`)= jiha.type.fr
+            .row
+                if (services.length === 0)
+                    span.text-secondary.mt-5.mx-auto.text-center Il n'y a aucun résultat pour votre demande
+                each aservice in services
+                    .col-lg-3.col-md-6.col-sm-12
+                        include _card1
+
+    #footer
+        include _footer
+    #Whats

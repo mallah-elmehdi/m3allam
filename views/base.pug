@@ -1,0 +1,48 @@
+doctype html
+html(lang=`${lang}`)
+
+head
+    //- Required meta tags
+    meta(charset="utf-8")
+    meta(name="description" content="اعثر على أحسن عمال لإصلاح منزلك في العديد من المجالات التي من بينها الصباغة، البناء، نجارة الخشب، نجارة الالمنيوم و الزجاج، الجبص، إصلاح و تركيب البرابول، السباكة - بلومبي، الحدادة، كهربائي، الخياطة، الميكانيكي، خطاط، تزفيت... Trouvez les meilleurs travailleurs pour réparer votre maison dans de nombreux domaines, y compris la teinture, la construction, le travail du bois, la menuiserie en aluminium et en verre, le gypse, la réparation et l'installation de parabole, la plomberie, la forge, l'électricien, la couture, le mécanicien, le calligraphe, l'asphalte ...")
+    meta(name="keywords" content="الصباغة,صباغ,teinturier,بناء,constructeur,نجارة الخشب,menuisier,نجار,نجارة الالمنيوم و الزجاج,menuisier aluminium et verre,الجبص,plâtre,إصلاح و تركيب البرابول,installation et réparation de parabole,بلومبي,السباكة,سباك,plombier,الحدادة,حداد,forgeron,كهربائي,électricien,الخياطة,tailleur,ميكانيكي,الميكانيكي,mécanicien,خطاط,calligraphe,تزفيت,asphalte,m3allam,m3allam.ma,معلم")
+    meta(name="author" content="MALLAH EL MEHDI")
+    meta(name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no")
+    //- CSS
+    link(rel="stylesheet" href="/../css/style.css")
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous")
+    //- FONT
+    link(href="https://fonts.googleapis.com/css2?family=Cairo:wght@300&display=swap" rel="stylesheet")
+    //- WHATSAPP
+    link(rel="stylesheet" href="https://rawcdn.githack.com/rafaelbotazini/floating-whatsapp/3d18b26d5c7d430a1ab0b664f8ca6b69014aed68/floating-wpp.min.css")
+    //- GOOGLE ADS
+    script(data-ad-client="ca-pub-9186069834171773" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js")
+    //- TITLE
+    if (lang === "ar")
+        title #{title.ar}
+    if (lang === "fr")
+        title #{title.fr}
+    if (!lang)
+        title #{title}
+
+//- THE BODY
+body.body-style.bg-light
+    .progress(style="height: 2px;")
+        .progress-bar.bg-success(role="progressbar" style="width: 0%" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100")
+    block content
+//- jQuery Bootstrap JS
+script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js")
+script(src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous")
+script(src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous")
+script(defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js")
+script(type="text/javascript" src="https://rawcdn.githack.com/rafaelbotazini/floating-whatsapp/3d18b26d5c7d430a1ab0b664f8ca6b69014aed68/floating-wpp.min.js")
+script(src="https://www.gstatic.com/firebasejs/7.14.4/firebase-app.js")
+script(src="https://www.gstatic.com/firebasejs/7.14.4/firebase-auth.js")
+script(type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5ed1b181606f5b0012eb5976&product=inline-share-buttons" async="async")
+script(src="/../js/base.js")
+if (lang === "ar")
+    script(defer src="/../js/init-firebase.js")
+if (lang === "fr")
+    script(defer src="/../js/init-firebase-fr.js")
+
+block footer

@@ -1,0 +1,57 @@
+include base
+
+block append footer
+    if (lang === "ar")
+        script(src="/../js/seConnecter.js")
+    if (lang === "fr")
+        script(src="/../js/seConnecter-fr.js")
+
+block content
+    #alt
+    .container.py-5
+        .text-center.my-2
+        .border.shadow.rounded-lg.mx-auto.bg-white.p-5.w-1
+
+            if (lang === "ar")
+                .text-center.mb-3
+                    a(href=`/${lang}`)
+                        img(src="/../graphics/logo-0.png", alt="m3allam.ma" width="80px")
+                    br
+                    span.fn-20 تسجيل الدخول
+                form(action=`/${lang}/se-connecter` method="post").text-right
+                    .form-group.input-group
+                        .input-group-append
+                            button.btn.btn-outline-success.rounded-left(id="confirm-code" type="button") أرسل الرمز
+                        input.form-control.rounded-right(type="number" id="phone" name="phone" placeholder="أدخل رقم هاتفك" dir="rtl" aria-describedby="confirm-code")
+                        .invalid-feedback(id="phone-feed")
+                    .form-group#load.mx-auto
+                    .form-group#captcha.mx-auto
+                    .form-group.input-group(id="code" style="display: none;")
+                        .input-group-append
+                            button.btn.btn-outline-success.rounded-left(id="code-check" type="button" ) تحقق
+                        input.form-control.rounded-right(type="number" id="checking" name="code" placeholder="ادخل الرمز هنا" dir="rtl" aria-describedby="code-check")
+                        .invalid-feedback(id="code-feed")
+                        .valid-feedback#valida
+                    button.btn.btn-success.w-100(type="submit"  id="submit-signin") تسجيل
+
+            if (lang === "fr")
+                .text-center.mb-3
+                    a(href=`/${lang}`)
+                        img(src="/../graphics/logo-0.png", alt="m3allam.ma" width="80px")
+                    br
+                    span.fn-20 Se connecter
+                form(action=`/${lang}/se-connecter` method="post")
+                    .form-group.input-group
+                        .input-group-append
+                            button.btn.btn-outline-success.rounded-left(id="confirm-code" type="button") Envoyez le code
+                        input.form-control.rounded-right(type="number" id="phone" name="phone" placeholder="Entrez votre numéro de téléphone" aria-describedby="confirm-code")
+                        .invalid-feedback(id="phone-feed")
+                    .form-group#load.mx-auto
+                    .form-group#captcha.mx-auto
+                    .form-group.input-group(id="code" style="display: none;")
+                        .input-group-append
+                            button.btn.btn-outline-success.rounded-left(id="code-check" type="button" ) Vérifier
+                        input.form-control.rounded-right(type="number" id="checking" name="code" placeholder="Entrez le code ici" aria-describedby="code-check")
+                        .invalid-feedback(id="code-feed")
+                        .valid-feedback#valida
+                    button.btn.btn-success.w-100(type="submit" id="submit-signin") Se connecter

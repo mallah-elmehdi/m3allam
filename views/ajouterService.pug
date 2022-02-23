@@ -1,0 +1,112 @@
+include base
+
+block append footer
+    if (lang === "ar")
+        script(src="/../js/monCompte.js")
+    if (lang === "fr")
+        script(src="/../js/monCompte-fr.js")
+
+block content
+    include _header
+
+    if (lang === "ar")
+        .bg.mt-3.w-100.container.text-success
+            a(href=`/${lang}/mon-compte/${user._id}`)
+                i.fas.fa-arrow-circle-left.fa-2x.text-success
+        .container
+            .border.bg-white.rounded.p-5.my-5.w-2.w-3.mx-auto
+                .mb-3.fn-20.text-center
+                    span إضافة معلومات حول خدمتك
+                form(action=`/${lang}/mon-compte/${user._id}/ajouter` method="post" enctype='multipart/form-data').text-right
+                    .row
+                        .col-lg-6.col-md-6.mb-2.form-group
+                            .input-group
+                                .input-group-prepend
+                                    .input-group-text سنة
+                                input.form-control(id="experience" type="number" name="experience" placeholder="كم عدد سنوات  خبرتك" dir="rtl" max="50" min="0")
+                                .invalid-feedback(id="expe-feed")
+                        .col-lg-6.col-md-6.form-group
+                            select(id="type-service" dir="rtl" name="service").custom-select
+                                option(selected disabled dir="rtl" value="") اختر نوع الخدمة
+                                each job in jobs
+                                    option(value=`${job.fr}` dir="rtl")= `${job.ar}`
+                    .row.form-group
+                        .col-12
+                            textarea.form-control(id="explain" name="explain" dir="rtl" placeholder="اشرح ما يمكنك القيام به في الخدمة التي اخترتها  مثلا: اذا اخترت الخياطة، فيجب شرح انواع الملابس التي تخيط..." minlength="0" maxlength="200")
+                            .invalid-feedback#my-feed
+                        .col-12
+                            span#strlength 0/200
+                    .form-group
+                        .w-100
+                            label هل لديك دبلوم في هذا المجال 
+                        .custom-control.custom-radio.custom-control-inline
+                            input.custom-control-input(type="radio" id="diplom1" value="oui" name="diploma")
+                            label.custom-control-label(for="diplom1") نعم
+                        .custom-control.custom-radio.custom-control-inline
+                            input.custom-control-input(type="radio" id="diplom2" value="non" name="diploma")
+                            label.custom-control-label(for="diplom2") لا
+                    .form-group
+                        .input-group.text-left
+                            .custom-file
+                                input.custom-file-input(type="file" id="picture" name="picture")
+                                label.custom-file-label(for="picture" data-browse="اضف صورة" aria-describedby="inputGroupFileAddon01") 
+                            .input-group-append
+                                .input-group-text(id="basic-addon2") 
+                                    i.fas.fa-camera
+                        small.text-danger(id="custom-feed")
+                        .form-group.fn-20(id="picture-preview" style="display: none;")
+                            i.fas.fa-times-circle.text-danger.my-1(id="remove")
+                            .border.p-2.rounded
+                                img.w-100(id="preview" src="")
+                    button.btn.btn-success#submit-compte إضافة الخدمة
+
+    if (lang === "fr")
+        .bg.mt-3.w-100.container.text-success
+            a(href=`/${lang}/mon-compte/${user._id}`)
+                i.fas.fa-arrow-circle-left.fa-2x.text-success
+        .container
+            .border.bg-white.rounded.p-5.my-5.w-2.w-3.mx-auto
+                .mb-3.fn-20.text-center
+                    span Ajouter des informations sur votre service
+                form(action=`/${lang}/mon-compte/${user._id}/ajouter` method="post" enctype='multipart/form-data')
+                    .row
+                        .col-lg-6.col-md-6.form-group
+                            select(id="type-service" name="service").custom-select
+                                option(selected disabled value="") Choisissez le type de service
+                                each job in jobs
+                                    option(value=`${job.fr}`)= `${job.fr}`            
+                        .col-lg-6.col-md-6.mb-2.form-group
+                            .input-group
+                                input.form-control(id="experience" type="number" name="experience" placeholder="Combien d'années d'expérience avez-vous" max="50" min="0")
+                                .invalid-feedback(id="expe-feed")
+                                .input-group-append
+                                    .input-group-text année                                
+                    .row.form-group
+                        .col-12
+                            textarea.form-control(id="explain" name="explain" placeholder="Expliquez ce que vous pouvez faire avec le service que vous choisissez..." minlength="0" maxlength="200")
+                            .invalid-feedback#my-feed
+                        .col-12
+                            span#strlength 0/200
+                    .form-group
+                        .w-100
+                            label Avez-vous un diplôme dans ce domaine?
+                        .custom-control.custom-radio.custom-control-inline
+                            input.custom-control-input(type="radio" id="diplom1" value="oui" name="diploma")
+                            label.custom-control-label(for="diplom1") oui
+                        .custom-control.custom-radio.custom-control-inline
+                            input.custom-control-input(type="radio" id="diplom2" value="non" name="diploma")
+                            label.custom-control-label(for="diplom2") non
+                    .form-group
+                        .input-group.text-left
+                            .custom-file
+                                input.custom-file-input(type="file" id="picture" name="picture")
+                                label.custom-file-label(for="picture" data-browse="Ajouter une photo" aria-describedby="inputGroupFileAddon01") 
+                            .input-group-append
+                                .input-group-text(id="basic-addon2") 
+                                    i.fas.fa-camera
+                        small.text-danger(id="custom-feed")
+                        .form-group.fn-20(id="picture-preview" style="display: none;")
+                            i.fas.fa-times-circle.text-danger.my-1(id="remove")
+                            .border.p-2.rounded
+                                img.w-100(id="preview" src="")
+                    button.btn.btn-success#submit-compte Ajouter le service

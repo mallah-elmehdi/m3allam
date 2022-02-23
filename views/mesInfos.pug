@@ -1,0 +1,181 @@
+include base
+
+block append footer
+    if (lang === "ar")
+        script(src="/../js/mesinfo.js")
+    if (lang === "fr")
+        script(src="/../js/mesinfo-fr.js")
+
+block content
+    #alt
+    .mx-auto
+        include _header
+    .bg.mt-3.w-100.container.text-success
+        a(href=`/${lang}/mon-compte/${user._id}`)
+            i.fas.fa-arrow-circle-left.fa-2x.text-success
+    .container
+        if (lang === "ar")
+            .border.shadow.rounded-lg.mx-auto.my-4.bg-white.p-5.w-2.w-3
+                .text-center.mb-3
+                    span.fn-20 معلوماتي
+                form(action=`/${lang}/mon-compte/${user._id}/mes-informations` method="post" enctype='multipart/form-data').text-right
+                    fieldset(disabled)
+                        .form-group
+                            input.form-control(id="name" type="text"  name="name" placeholder="أدخل اسمك الكامل" dir="rtl" value=`${user.name}`)
+                            .invalid-feedback(id="name-feed") يجب أن يحتوي الاسم على أحرف فقط
+                        .form-group
+                            select.custom-select(id="jiha" name="jiha" dir="rtl" )
+                                each jiha in jihat
+                                    if (user.jiha === jiha.id)
+                                        option(value=`${jiha.id}` selected)= jiha.type.ar
+                                    else
+                                        option(value=`${jiha.id}`)= jiha.type.ar
+                        .form-group
+                            select.custom-select(id="city" name="city" dir="rtl" data-city=`${user.city}`)
+                        .form-group.input-group
+                            .input-group-append
+                                button.btn.btn-outline-success.rounded-left(id="confirm-code" type="button") أرسل الرمز
+                            input.form-control.rounded-right(type="number" id="phone" name="phone" placeholder="أدخل رقم هاتفك" dir="rtl" aria-describedby="confirm-code"  value=`0${user.phone.substring(4)}`)
+                            .invalid-feedback(id="phone-feed")
+                        .form-group#load.mx-auto
+                        .form-group#captcha.mx-auto
+                        .form-group.input-group(id="code" style="display: none;")
+                            .input-group-append
+                                button.btn.btn-outline-success.rounded-left(id="code-check" type="button" ) تحقق
+                            input.form-control.rounded-right(type="number" id="checking" name="code" placeholder="ادخل الرمز هنا" dir="rtl" aria-describedby="code-check")
+                            .invalid-feedback(id="code-feed")
+                            .valid-feedback#valida
+                        .form-group
+                            .w-100
+                                label.mr-2(id="whatsapp-text") هل تستخدم هذا الرقم على الواتس اب
+                                i.fab.fa-whatsapp.text-success
+                            .custom-control.custom-radio.custom-control-inline
+                                if (user.whatsapp === "oui")
+                                    input.custom-control-input(type="radio" id="whatsOuiNo1" value="oui" name="whatsapp" checked=true)
+                                else
+                                    input.custom-control-input(type="radio" id="whatsOuiNo1" value="oui" name="whatsapp")
+                                label.custom-control-label(for="whatsOuiNo1") نعم
+                            .custom-control.custom-radio.custom-control-inline
+                                if (user.whatsapp === "non")
+                                    input.custom-control-input(type="radio" id="whatsOuiNo2" value="non" name="whatsapp" checked=true)
+                                else
+                                    input.custom-control-input(type="radio" id="whatsOuiNo2" value="non" name="whatsapp")
+                                label.custom-control-label(for="whatsOuiNo2") لا
+                        .form-group
+                            .input-group.text-left
+                                .custom-file
+                                    input.custom-file-input(type="file" id="picture" name="picture")
+                                    label.custom-file-label(for="picture" data-browse="صورة شخصية" aria-describedby="inputGroupFileAddon01") 
+                                .input-group-append
+                                    .input-group-text(id="basic-addon2") 
+                                        i.fas.fa-camera
+                            small.text-danger(id="custom-feed")
+                        .form-group.fn-20(id="picture-preview" style="display: none;")
+                            i.fas.fa-times-circle.text-danger.mb-1(id="remove")
+                            .border.p-2.rounded
+                                img.w-100(id="preview" src="")
+                        .form-group.text-right#pic-profile
+                            img.border.rounded-circle(src=`/../graphics/worker/${user.photo}`, width="150px")
+                    .text-right
+                        button.btn.btn-info#edit(type="button") تغيير المعلومات
+                        a.btn.btn-secondary.edittt(href=`/${lang}/mon-compte/${user._id}/mes-informations` style="display: none;")
+                            i.far.fa-times-circle
+                        button.btn.btn-success#submit-compte.edittt.ml-2(style="display: none;") حفظ
+
+            .border.shadow.rounded-lg.mx-auto.mb-4.bg-white.p-3.w-2.w-3.text-right
+                .mb-2
+                    span إذا كنت تريد حذف حسابك
+                button.btn.btn-outline-danger(data-toggle="modal" data-target="#deleteAccount") حذف
+                .modal.fade(id="deleteAccount" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="deleteAccountLabel" aria-hidden="true")
+                    .modal-dialog(role="document")
+                        .modal-content
+                            .modal-header هل تريد حذف حسابك؟
+                            .modal-footer.text-right
+                                form(action=`/${lang}/mon-compte/${user._id}/supprimer?_method=DELETE` method="POST")
+                                    button.btn.btn-danger(type="submit") تأكيد
+                                button.btn.btn-light(type="button" data-dismiss="modal") إلغاء
+
+            //- ==============================================================
+
+        if (lang === "fr")
+            .border.shadow.rounded-lg.mx-auto.my-4.bg-white.p-5.w-2.w-3
+                .text-center.mb-3
+                    span.fn-20 mes informations
+                form(action=`/${lang}/mon-compte/${user._id}/mes-informations` method="post" enctype='multipart/form-data')
+                    fieldset(disabled)
+                        .form-group
+                            input.form-control(id="name" type="text"  name="name" placeholder="Entrez votre nom complet" value=`${user.name}`)
+                            .invalid-feedback(id="name-feed") Le nom ne doit contenir que des lettres
+                        .form-group
+                            select.custom-select(id="jiha" name="jiha" )
+                                each jiha in jihat
+                                    if (user.jiha === jiha.id)
+                                        option(value=`${jiha.id}` selected)= jiha.type.fr
+                                    else
+                                        option(value=`${jiha.id}`)= jiha.type.fr
+                        .form-group
+                            select.custom-select(id="city" name="city" data-city=`${user.city}`)
+                        .form-group.input-group
+                            .input-group-append
+                                button.btn.btn-outline-success.rounded-left(id="confirm-code" type="button") Envoyez le code
+                            input.form-control.rounded-right(type="number" id="phone" name="phone" placeholder="Entrez votre numéro de téléphone" aria-describedby="confirm-code"  value=`0${user.phone.substring(4)}`)
+                            .invalid-feedback(id="phone-feed")
+                        .form-group#load.mx-auto
+                        .form-group#captcha.mx-auto
+                        .form-group.input-group(id="code" style="display: none;")
+                            .input-group-append
+                                button.btn.btn-outline-success.rounded-left(id="code-check" type="button" ) Vérifier
+                            input.form-control.rounded-right(type="number" id="checking" name="code" placeholder="Entrez le code ici" aria-describedby="code-check")
+                            .invalid-feedback(id="code-feed")
+                            .valid-feedback#valida
+                        .form-group
+                            .w-100
+                                label.mr-2(id="whatsapp-text") Utilisez-vous ce numéro sur WhatsApp?
+                                i.fab.fa-whatsapp.text-success
+                            .custom-control.custom-radio.custom-control-inline
+                                if (user.whatsapp === "oui")
+                                    input.custom-control-input(type="radio" id="whatsOuiNo1" value="oui" name="whatsapp" checked=true)
+                                else
+                                    input.custom-control-input(type="radio" id="whatsOuiNo1" value="oui" name="whatsapp")
+                                label.custom-control-label(for="whatsOuiNo1") oui
+                            .custom-control.custom-radio.custom-control-inline
+                                if (user.whatsapp === "non")
+                                    input.custom-control-input(type="radio" id="whatsOuiNo2" value="non" name="whatsapp" checked=true)
+                                else
+                                    input.custom-control-input(type="radio" id="whatsOuiNo2" value="non" name="whatsapp")
+                                label.custom-control-label(for="whatsOuiNo2") non
+                        .form-group
+                            .input-group.text-left
+                                .custom-file
+                                    input.custom-file-input(type="file" id="picture" name="picture")
+                                    label.custom-file-label(for="picture" data-browse="ma photo personnelle" aria-describedby="inputGroupFileAddon01") 
+                                .input-group-append
+                                    .input-group-text(id="basic-addon2") 
+                                        i.fas.fa-camera
+                            small.text-danger(id="custom-feed")
+                        .form-group.fn-20(id="picture-preview" style="display: none;")
+                            i.fas.fa-times-circle.text-danger.mb-1(id="remove")
+                            .border.p-2.rounded
+                                img.w-100(id="preview" src="")
+                        .form-group#pic-profile
+                            img.border.rounded-circle(src=`/../graphics/worker/${user.photo}`, width="150px")
+                    .text-left
+                        button.btn.btn-info#edit(type="button") Changer les informations
+                        a.btn.btn-secondary.edittt(href=`/${lang}/mon-compte/${user._id}/mes-informations` style="display: none;")
+                            i.far.fa-times-circle
+                        button.btn.btn-success#submit-compte.edittt.ml-2(style="display: none;") Enregistrer
+
+
+            .border.shadow.rounded-lg.mx-auto.mb-4.bg-white.p-3.w-2.w-3
+                .mb-2
+                    span Si vous souhaitez supprimer votre compte
+                
+                button.btn.btn-outline-danger(data-toggle="modal" data-target="#deleteAccount") supprimer
+                .modal.fade(id="deleteAccount" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="deleteAccountLabel" aria-hidden="true")
+                    .modal-dialog(role="document")
+                        .modal-content
+                            .modal-header Voulez-vous supprimer votre compte?
+                            .modal-footer
+                                form(action=`/${lang}/mon-compte/${user._id}/supprimer?_method=DELETE` method="POST")
+                                    button.btn.btn-danger(type="submit") confirmer
+                                button.btn.btn-light(type="button" data-dismiss="modal") annuler

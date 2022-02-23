@@ -1,0 +1,204 @@
+include base
+
+block append footer
+    if (lang === "ar")
+        script(src="/../js/index.js")
+    if (lang === "fr")
+        script(src="/../js/index-fr.js")
+
+block content
+    include _header1
+    if (message != "")
+        .alert.alert-danger.alert-dismissible.fade.show.fixed-top.text-center(role="alert")= message
+            button.close(type="button" data-dismiss="alert" aria-label="Close")
+                span(aria-hidden="true") &times;
+    .container.my-3
+        if (lang === "ar")
+            .bg-my-2.py-5.text-white.mb-3.rounded.border.w-100.h-100
+                #presentation.carousel.slide(data-ride="carousel")
+                    .carousel-inner
+                        .carousel-item.active
+                            .p-5.text-center
+                                .fn-30-min.bg-info لأن الكثير من العمال في المغرب فقدوا وظائفهم وفرصة العثور على عملاء جدد خلال هذه الحالة الوبائية لكورونا
+
+                        .carousel-item
+                            .p-5.text-center               
+                                .fn-30-min.bg-info تم إنشاء هذه البوابة الإلكتونية لهؤلاء العمال حتى يتمكنوا من نشر الخدمات التي يمكنهم القيام بها
+
+                        .carousel-item
+                            .p-5.text-center
+                                .fn-30-min.bg-info وسيتم نشر خدماتهم     عبر وسائل التواصل الاجتماعي حتى يتمكنوا من الحصول على فرص عمل و فرص دخل جديدة
+
+                        .carousel-item.p-5
+                            .text-center.bg-info
+                                .fn-30-min قم بالتسجيل الآن و شارك الموقع مع الآخرين
+                                a#logg(href="/ar/se-connecter")
+                                    button.mb-2.btn.btn-light.btn-lg(type="button") تسجيل الدخول
+                    a.carousel-control-prev(href="#presentation" role="button" data-slide="prev")
+                        span.carousel-control-prev-icon(aria-hidden="true")
+                        span.sr-only Previous
+                    a.carousel-control-next(href="#presentation" role="button" data-slide="next")
+                        span.carousel-control-next-icon(aria-hidden="true")
+                        span.sr-only Next
+
+            form.form-group(action="/ar", method="post")
+                .row
+                    .col-lg-8.col-md-8
+                        .container
+                            .row
+                                .col-lg-6.col-md-6.mb-3
+                                    .grid-1
+                                        button.btn.btn-success.mr-2.sub-mit
+                                            i.fas.fa-search
+                                        input.form-control.w-100(type="text" name="search" placeholder="بحث" dir="rtl")
+                                .col-lg-6.col-md-6
+                                    .container
+                                        .row
+                                            .col-12
+                                                select.custom-select(id="jiha" dir="rtl" name="jiha")
+                                                    option(selected disabled) اختر الجهة
+                                                    each jiha in jihat
+                                                        option(value=`${jiha.id}`)= jiha.type.ar
+                                            .col-12.mt-3
+                                                select.custom-select.is-valid.mb-3(id="city" name="city" dir="rtl" style="display: none;")
+                                .col-12.w-100.h-100.border.rounded.mb-3.bg-white
+                                    img.w-100.rounded(src="/../graphics/m3allam.gif", alt="welcome")
+                                .col-12
+                                    .jumbotron.w-100.text-center
+                                        .container
+                                            p.lead يرجى مشاركة الموقع حتى يتمكن الجميع من الاستفادة منه
+                                            .sharethis-inline-share-buttons
+                    .col-lg-4.col-md-4.fn-15
+                        .list-group.rounded.text-right
+                            .list-group-item.bg-success.text-white الخدمات
+                                i.fas.fa-bars.d-inline.ml-3
+                            each job in jobs
+                                button.list-group-item.list-group-item-action.sub-mit(name="service" value=`${job.fr}`)= job.ar
+                                    img.ml-3(src=`/../graphics/${job.fr}.png`, width="20px")
+            .mb-3.text-right.fn-22
+                span.px-3.alert-success.rounded-pill أسئلة مكررة
+            #accordionExample.accordion.text-right
+                .card
+                    #headingOne.card-header
+                        h2.mb-0
+                            button.btn.btn-link.text-dark(type='button' data-toggle='collapse' data-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne') كيف يمكنني تسجيل الدخول في هذا الموقع
+                    #collapseOne.collapse.show(aria-labelledby='headingOne' data-parent='#accordionExample')
+                        .card-body طريقة التسجيل سهلة جدا، شاهد هذا الفيديو
+                .card
+                    #headingTwo.card-header
+                        h2.mb-0
+                            button.btn.btn-link.text-dark.collapsed(type='button' data-toggle='collapse' data-target='#collapseTwo' aria-expanded='false' aria-controls='collapseTwo') كيف سنساعدك في إيجاد فرص عمل جديدة لتحقيق المزيد من الربح
+                    #collapseTwo.collapse(aria-labelledby='headingTwo' data-parent='#accordionExample')
+                        .card-body مهمتنا هي جعل عملك ينمو وسنساعدك على الوصول إلى المزيد من العملاء مجانًا. يجب عليك وضع خدماتك في الموقع و سنقوم بنشرها عبر الفسبوك انستغرام و باقي مواقع التواصل الاجتماعي لجلب زبناء جدد من اجل الاستفادة من خدمتك، وهكذا ستحصل على فرص كثيرة للحصول على دخل إضافي
+
+
+            if (services.length > 0)
+                .text-center.my-3.border.alert-success.rounded-pill
+                    span.fn-22 خدمات مختلفة
+                each service in services
+                    .text-right.my-3
+                        a.text-decoration-none.fn-22(href="/ar/resultat?service=sabar") 
+                            .badge.badge-pill.alert-dark= service.service.ar
+                                img.ml-2(src=`/../graphics/${service.id}.png`, width="20px")
+                    .scrl-h
+                        each aservice in service.content
+                            include _card
+        //- ==============================================
+
+        if (lang === "fr")
+            .bg-my-2.py-5.text-white.mb-3.rounded.border.w-100.h-100
+                #presentation.carousel.slide(data-ride="carousel")
+                    .carousel-inner
+                        .carousel-item.active
+                            .p-5.text-center
+                                .fn-30-min.bg-info Nombreux des m3allam au Maroc ont perdu leur emploi et l'opportunité de trouver de nouveaux clients lors de cette épidémie de Corona
+
+                        .carousel-item
+                            .p-5.text-center               
+                                .fn-30-min.bg-info Ce site a été créé pour ces m3allam afin qu'ils puissent publier les services qu'ils peuvent faire
+
+                        .carousel-item
+                            .p-5.text-center
+                                .fn-30-min.bg-info Leurs services seront publiés sur les médias sociaux afin qu'ils puissent obtenir de nouvelles opportunités d'emploi
+
+                        .carousel-item.p-5
+                            .text-center.bg-info
+                                .fn-30-min Inscrivez-vous maintenant et partager le site avec le les autres
+                                a#logg(href="/fr/se-connecter")
+                                    button.mb-2.btn.btn-light.btn-lg(type="button") Se connecter
+                    a.carousel-control-prev(href="#presentation" role="button" data-slide="prev")
+                        span.carousel-control-prev-icon(aria-hidden="true")
+                        span.sr-only Previous
+                    a.carousel-control-next(href="#presentation" role="button" data-slide="next")
+                        span.carousel-control-next-icon(aria-hidden="true")
+                        span.sr-only Next
+
+            form.form-group(action="/fr", method="post")
+                .row
+                    .col-lg-4.col-md-4.fn-15
+                        .list-group.rounded
+                            .list-group-item.bg-success.text-white
+                                i.fas.fa-bars.d-inline.mr-3
+                                span les services
+                            each job in jobs
+                                button.list-group-item.list-group-item-action.sub-mit(name="service" value=`${job.fr}`)
+                                    img.mr-3(src=`/../graphics/${job.fr}.png`, width="20px")
+                                    span= job.fr
+                    .col-lg-8.col-md-8
+                        .container
+                            .row
+                                .col-lg-6.col-md-6.mb-3
+                                    .grid-1
+                                        button.btn.btn-success.mr-2.sub-mit
+                                            i.fas.fa-search
+                                        input.form-control.w-100(type="text" name="search" placeholder="Chercher")
+
+                                .col-lg-6.col-md-6
+                                    .container
+                                        .row
+                                            .col-12
+                                                select.custom-select(id="jiha" name="jiha")
+                                                    option(selected disabled) Choisissez la région
+                                                    each jiha in jihat
+                                                        option(value=`${jiha.id}`)= jiha.type.fr
+                                            .col-12.mt-3
+                                                select.custom-select.is-valid.mb-3(id="city" name="city" style="display: none;")
+                                .col-12.w-100.h-100.border.rounded.mb-3.bg-white
+                                    img.w-100.rounded(src="/../graphics/m3allam.gif", alt="welcome")
+                                .col-12
+                                    .jumbotron.w-100.text-center
+                                        .container
+                                            p.lead Veuillez partager le site pour que tout m3allam puisse en bénéficier
+                                            .sharethis-inline-share-buttons
+            .mb-3.fn-22
+                span.px-3.alert-success.rounded-pill FAQS
+            #accordionExample.accordion
+                .card
+                    #headingOne.card-header
+                        h2.mb-0
+                            button.btn.btn-link.text-dark(type='button' data-toggle='collapse' data-target='#collapseOne' aria-expanded='true' aria-controls='collapseOne') Comment puis-je m'inscrire sur ce site
+                    #collapseOne.collapse.show(aria-labelledby='headingOne' data-parent='#accordionExample')
+                        .card-body La méthode d'inscription est très simple, veuillez regarder cette vidéo
+                            //- video.w-100.mt-2(src="/../graphics/m3allam.mp4" controls type="video/mp4")
+                .card
+                    #headingTwo.card-header
+                        h2.mb-0
+                            button.btn.btn-link.text-dark.collapsed(type='button' data-toggle='collapse' data-target='#collapseTwo' aria-expanded='false' aria-controls='collapseTwo') comment m3allam.ma vous aidera à atteindre plus de clients
+                    #collapseTwo.collapse(aria-labelledby='headingTwo' data-parent='#accordionExample')
+                        .card-body le travail de m3allam.ma est de booster vos services via les réseaux sociaux pour atteindre plus de clients
+            if (services.length > 0)
+                .text-center.my-3.border.alert-success.rounded-pill
+                    span.fn-22 Different services
+                each service in services
+                    .my-3
+                        a.text-decoration-none.fn-22(href="/fr/resultat?service=sabar") 
+                            .badge.badge-pill.alert-dark
+                                img.mr-2(src=`/../graphics/${service.id}.png`, width="20px")
+                                span= service.service.fr
+                    .scrl-h
+                        each aservice in service.content
+                            include _card
+
+    #footer
+        include _footer
+    #Whats

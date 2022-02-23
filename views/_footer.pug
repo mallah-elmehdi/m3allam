@@ -1,0 +1,54 @@
+if (lang === "ar")
+
+    .bg-light.p-3.border-top.mt-3
+        .container
+            .row
+                .col-5
+                    a.text-left(data-toggle="modal" data-target="#contactUs" href="#")
+                        span للتواصل معنا
+                    .modal.fade(id="contactUs" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+                        .modal-dialog(role="document")
+                            .modal-content
+                                .modal-header
+                                    .text-right
+                                        span اتصل بنا للحصول على مزيد من المعلومات
+                                    button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                                        span(aria-hidden="true") &times;
+                                .modal-body
+                                    .mb-3.w-100
+                                        i.text-primary.fas.fa-envelope-square.fn-22.mr-2
+                                        span mallahelmehdi@gmail.com
+                                    .w-100
+                                        i.text-success.fab.fa-whatsapp-square.fn-22.mr-2
+                                        span 0694976523
+                .col-7
+                    .text-right
+                        a(href="/politique-de-confidentialite") سياسة الخصوصية
+
+//- ================================ FRENSH
+
+if (lang === "fr")
+
+    .bg-light.p-3.border-top.mt-3
+        .container
+            .row
+                .col-7
+                    .text-left
+                        a(href="/politique-de-confidentialite") politique de confidentialité
+                .col-5.text-right
+                    a(data-toggle="modal" data-target="#contactUs" href="#")
+                        span Contactez nous
+                    .modal.fade.text-left(id="contactUs" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true")
+                        .modal-dialog(role="document")
+                            .modal-content
+                                .modal-header
+                                    span Contactez-nous pour plus d'informations
+                                    button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+                                        span(aria-hidden="true") &times;
+                                .modal-body
+                                    .mb-3.w-100
+                                        i.text-primary.fas.fa-envelope-square.fn-22.mr-2
+                                        span mallahelmehdi@gmail.com
+                                    .w-100
+                                        i.text-success.fab.fa-whatsapp-square.fn-22.mr-2
+                                        span 0694976523

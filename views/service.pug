@@ -1,0 +1,110 @@
+include base
+
+block append footer
+  script(src="/../js/service.js")
+
+block content
+    include _header1
+    form(action=`/${lang}` method="POST")
+        input.d-none(type="text" name="search" value="")
+        input.d-none(type="text" name="city" value=JSON.stringify(serv.user.city))
+        input.d-none(type="text" name="jiha" value=`${serv.user.jiha}`)
+        .scrl-h.w-100.h-100.my-3.border-bottom
+            each job in jobs
+                button.btn.alert-info.service.rounded-pill.ml-3.mb-3(name="service" value=`${job.fr}`)=job.fr
+
+    if (lang === "ar")
+        .container.text-right
+            .my-3
+                .badge.badge-pill.bg-my.mr-2
+                    .fn-20.text-dark= serv.user.city.ar
+                        img.ml-2.bg-success.rounded-circle.p-1(src="/../graphics/index/location.png", width="25px")
+                    -for(var i = 0; i < jobs.length; i++)
+                        if (jobs[i].fr === serv.service)
+                            -var jobId = jobs[i].fr
+                            -var jobName = jobs[i].ar
+                .badge.badge-pill.bg-my
+                    .fn-20.text-dark= jobName
+                        img.ml-2.bg-success.rounded-circle.p-1(src=`/../graphics/index/${jobId}.png`, width="25px")
+            .row
+                .col-lg-7.pt-3.bg-white.rounded.border
+                    .row
+                        .col-12
+                            img(src=`/../graphics/service/${serv.picture}` class="card-img-top").w-100
+                        .col-12.fn-20
+                            .card-text.my-3= serv.explain
+                .col-lg-5.mb-3
+                    .p-3.stic-top.z-ind.bg-white.mt-2.rounded.border
+                        .grid-4.mb-2
+                            .grid-5.mr-2.fn-20.my-auto
+                                span= serv.user.name
+                                span.text-muted= `${serv.experience} : سنوات الخبرة `
+                            a(href=`/ouvrier?id=${serv.user._id}`)    
+                                img.m-auto.rounded-pill(src=`/../graphics/worker/${serv.user.photo}`, alt="profile").w-100
+                        if (serv.user.whatsapp === "oui")
+                            .grid-3
+                                .btn.dbiha(data-phone=`${serv.user.phone}`)
+                                    i.fab.fa-whatsapp.text-success.fa-2x
+                                a.btn.btn-outline-success.my-auto.ml-3(href=`tel:${serv.user.phone}`) اتصل
+                        if (serv.user.whatsapp === "non")
+                            a.btn.btn-outline-success.my-auto.w-100(href=`tel:${serv.user.phone}`) اتصل
+            if (services.length > 1)
+                .card-body
+                    .fn-20= `${serv.user.name} الخدمات الأخرى التي يقدمها`
+                .border.bg-white.rounded.px-3.pt-3
+                    .scrl-h
+                        each aservice in services
+                            if (aservice.id != serv._id)
+                                include _card3
+        #footer
+            include _footer
+        #Whats
+
+
+    if (lang === "fr")
+        .container
+            .my-3
+                .badge.badge-pill.bg-my.mr-2
+                    .fn-20.text-dark
+                        img.mr-1.bg-success.rounded-circle.p-1(src="/../graphics/index/location.png", width="25px")
+                        span= serv.user.city.fr
+                    -for(var i = 0; i < jobs.length; i++)
+                        if (jobs[i].fr === serv.service)
+                            -var jobId = jobs[i].fr
+                .badge.badge-pill.bg-my
+                    .fn-20.text-dark
+                        img.mr-1.bg-success.rounded-circle.p-1(src=`/../graphics/index/${jobId}.png`, width="25px")
+                        span= jobId
+            .row
+                .col-lg-7.pt-3.bg-white.rounded.border
+                    .row
+                        .col-12
+                            img(src=`/../graphics/service/${serv.picture}` class="card-img-top").w-100
+                        .col-12.fn-20
+                            .card-text.my-3= serv.explain
+                .col-lg-5.mb-3
+                    .p-3.stic-top.z-ind.bg-white.mt-2.rounded.border
+                        .grid-10.mb-2
+                            a(href=`/ouvrier?id=${serv.user._id}`)
+                                img.m-auto.rounded-pill(src=`/../graphics/worker/${serv.user.photo}`, alt="profile").w-100
+                            .grid-5.ml-2.fn-20.my-auto
+                                span= serv.user.name
+                                span.text-muted= `Années d'expérience : ${serv.experience}`
+                        if (serv.user.whatsapp === "oui")
+                            .grid-3
+                                .btn.dbiha(data-phone=`${serv.user.phone}`)
+                                    i.fab.fa-whatsapp.text-success.fa-2x
+                                a.btn.btn-outline-success.my-auto.ml-3(href=`tel:${serv.user.phone}`) appel
+                        if (serv.user.whatsapp === "non")
+                            a.btn.btn-outline-success.my-auto.w-100(href=`tel:${serv.user.phone}`) appel
+            if (services.length > 1)
+                .card-body
+                    .fn-20= `Autres services proposé par ${serv.user.name}`
+                .border.bg-white.rounded.px-3.pt-3
+                    .scrl-h
+                        each aservice in services
+                            if (aservice.id != serv._id)
+                                include _card3
+        #footer
+            include _footer
+        #Whats
